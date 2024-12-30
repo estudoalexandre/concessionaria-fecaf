@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veículos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cadastro de Veículo</h1>
+        <form method="POST" action="/veiculos/salvar">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Civic" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Honda" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="ano" class="form-label">Ano</label>
+                    <input type="number" class="form-control" id="ano" name="ano" placeholder="Ex: 2021" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="rodas" class="form-label">Rodas</label>
+                    <input type="text" class="form-control" id="rodas" name="rodas" placeholder="Ex: 4" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select class="form-select" id="tipo" name="tipo" required>
+                        <option value="">Selecione</option>
+                        <option value="Gasolina">Carro</option>
+                        <option value="Diesel">Moto</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="combustivel" class="form-label">Combustível</label>
+                    <select class="form-select" id="combustivel" name="combustivel" required>
+                        <option value="">Selecione</option>
+                        <option value="Gasolina">Gasolina</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Flex">Flex</option>
+                        <option value="Elétrico">Elétrico</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="cor" class="form-label">Cor</label>
+                    <input type="text" class="form-control" id="cor" name="cor" placeholder="Ex: Preto" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="cambioAutomatico" class="form-label">Câmbio Automático</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cambioAutomatico" id="cambioSim" value="1" required>
+                        <label class="form-check-label" for="cambioSim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cambioAutomatico" id="cambioNao" value="0" required>
+                        <label class="form-check-label" for="cambioNao">Não</label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="reset" class="btn btn-secondary ms-2">Limpar</button>
+            </div>
+        </form>
+    </div>
+    <h1 class="text-center mb-4">Lista de Veículos</h1>
+    <div class="row">
+        <!-- Itera sobre os veículos -->
+        <div th:each="veiculo : ${veiculos}" class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${veiculo.modelo}">Modelo</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${veiculo.marca}">Marca</h6>
+                    <p class="card-text">
+                        <strong>Ano:</strong> <span th:text="${veiculo.ano}"></span><br>
+                        <strong>Cor:</strong> <span th:text="${veiculo.cor}"></span><br>
+                        <strong>Tipo:</strong> <span th:text="${veiculo.tipo}"></span><br>
+                        <strong>Câmbio Automático:</strong> <span th:text="${veiculo.cambioAutomatico ? 'Sim' : 'Não'}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

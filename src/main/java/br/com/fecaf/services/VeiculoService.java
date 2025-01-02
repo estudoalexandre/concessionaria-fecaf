@@ -17,7 +17,15 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
+    public Veiculo buscarPorId(Long id) {
+        return veiculoRepository.getReferenceById(id);
+    }
+
     public void salvarVeiculo(Veiculo veiculo) {
         veiculoRepository.save(veiculo);
+    }
+
+    public void deleteVeiculo(Long id) {
+        veiculoRepository.deleteById(id);
     }
 }

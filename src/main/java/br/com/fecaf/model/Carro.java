@@ -1,5 +1,8 @@
 package br.com.fecaf.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Carro extends Veiculo {
     private double motor;
     private boolean arCondicionado;

@@ -14,7 +14,7 @@ public class App {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            System.out.println("Hello World");
+            System.out.println("O servidor foi executado");
         };
     }
 }

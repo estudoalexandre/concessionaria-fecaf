@@ -4,27 +4,29 @@ package br.com.fecaf.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "veiculo")
-public class Veiculo {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Veiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
     private String modelo;
     private String marca;
     private int ano;
-    private String rodas;
     private String tipo;
     private String combustivel;
     private String cor;
     private boolean cambioAutomatico;
+    private String imagem;
 
 
-    public int getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,14 +52,6 @@ public class Veiculo {
 
     public void setAno(int ano) {
         this.ano = ano;
-    }
-
-    public String getRodas() {
-        return rodas;
-    }
-
-    public void setRodas(String rodas) {
-        this.rodas = rodas;
     }
 
     public String getTipo() {
@@ -90,5 +84,13 @@ public class Veiculo {
 
     public void setCambioAutomatico(boolean cambioAutomatico) {
         this.cambioAutomatico = cambioAutomatico;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

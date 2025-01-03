@@ -3,6 +3,8 @@ package br.com.fecaf.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Veiculo {
@@ -17,6 +19,9 @@ public abstract class Veiculo {
     private String tipo;
     private String combustivel;
     private String cor;
+    private BigDecimal preco;
+    private long quilometragem;
+    private boolean disponibilidade;
     private boolean cambioAutomatico;
     private String imagem;
 
@@ -76,6 +81,30 @@ public abstract class Veiculo {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public boolean isDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public long getQuilometragem() {
+        return quilometragem;
+    }
+
+    public void setQuilometragem(long quilometragem) {
+        this.quilometragem = quilometragem;
     }
 
     public boolean isCambioAutomatico() {

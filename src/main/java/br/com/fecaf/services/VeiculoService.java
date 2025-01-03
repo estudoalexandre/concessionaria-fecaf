@@ -18,7 +18,7 @@ public class VeiculoService {
     }
 
     public Veiculo buscarPorId(Long id) {
-        return veiculoRepository.getReferenceById(id);
+        return veiculoRepository.findById(id).orElseThrow(() -> new RuntimeException("Veículo não encontrado com ID: " + id));
     }
 
     public void salvarVeiculo(Veiculo veiculo) {
@@ -27,5 +27,9 @@ public class VeiculoService {
 
     public void deleteVeiculo(Long id) {
         veiculoRepository.deleteById(id);
+    }
+
+    public void atualizarVeiculo(Veiculo veiculo) {
+        veiculoRepository.save(veiculo);
     }
 }

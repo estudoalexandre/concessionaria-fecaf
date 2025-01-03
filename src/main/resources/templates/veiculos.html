@@ -32,8 +32,8 @@
                     <label for="tipo" class="form-label">Tipo</label>
                     <select class="form-select" id="tipo" name="tipo" required>
                         <option value="">Selecione</option>
-                        <option value="carro">Carro</option>
-                        <option value="moto">Moto</option>
+                        <option value="carro" name="carro">Carro</option>
+                        <option value="moto" name="moto">Moto</option>
                     </select>
                 </div>
                 <div id="campos-carro" style="display: none;">
@@ -83,9 +83,30 @@
                     <label for="cor" class="form-label">Cor</label>
                     <input type="text" class="form-control" id="cor" name="cor" placeholder="Ex: Preto" required>
                 </div>
+
                 <div class="col-md-4">
                     <label for="cor" class="form-label">Insira a URL da imagem</label>
-                    <input type="text" class="form-control" id="imagem" name="imagem" placeholder="Ex: https://media.istockphoto.com/id/1273534607/pt/vetorial/car-icon-auto-vehicle-isolated-transport-icons-automobile-silhouette-front-view-sedan-car.jpg?s=612x612&w=0&k=20&c=FCidakqoIGcNGz_BrhJrBqDyWztSBzz5GX-3KlFnY-8=" required>
+                    <input type="text" class="form-control" id="imagem" name="imagem"
+                           placeholder="Ex: https://media.istockphoto.com/id/1273534607/pt/vetorial/car-icon-auto-vehicle-isolated-transport-icons-automobile-silhouette-front-view-sedan-car.jpg?s=612x612&w=0&k=20&c=FCidakqoIGcNGz_BrhJrBqDyWztSBzz5GX-3KlFnY-8="
+                           required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="preco" class="form-label">Insira o Valor do Veiculo</label>
+                    <input type="number" class="form-control" id="preco" name="preco">
+                </div>
+                <div class="col-md-4">
+                    <label for="quilometragem" class="form-label">Insira a Quilometragem</label>
+                    <input type="number" class="form-control" id="quilometragem" name="quilometragem">
+                </div>
+                <div class="col-md-4">
+                    <label for="disponibilidade" class="form-label">Disponibilidade</label>
+                    <select class="form-select" id="disponibilidade" name="disponibilidade" required>
+                        <option value="">Selecione</option>
+                        <option value="1">Disponivel</option>
+                        <option value="0">Vendido</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -118,8 +139,10 @@
             <th>Marca</th>
             <th>Ano</th>
             <th>Cor</th>
-            <th>Tipo</th>
-            <th>Câmbio Automático</th>
+            <th>Preço</th>
+            <th>KMs Rodados</th>
+            <th>Câmbio Auto</th>
+            <th>Disponibilidade</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -132,8 +155,10 @@
             <td th:text="${veiculo.marca}">Marca</td>
             <td th:text="${veiculo.ano}">Ano</td>
             <td th:text="${veiculo.cor}">Cor</td>
-            <td th:text="${veiculo.tipo}">Tipo</td>
+            <td th:text="'R$ ' + ${veiculo.preco}">Valor</td>
+            <td th:text="${veiculo.quilometragem} + ' Km'">KM</td>
             <td th:text="${veiculo.cambioAutomatico ? 'Sim' : 'Não'}">Câmbio Automático</td>
+            <td th:text="${veiculo.disponibilidade ? 'Disponivel' : 'Vendido'}">Disponibilidade</td>
             <td>
                 <div class="d-flex gap-2">
                     <form method="post" action="veiculos/deletar">
@@ -142,9 +167,9 @@
                             <i class="bi bi-trash"></i> Excluir
                         </button>
                     </form>
-                    <button href="" class="btn btn-primary btn-sm">
+                    <a th:href="'/veiculos/editar/' + ${veiculo.id}" class="btn btn-primary btn-sm">
                         <i class="bi bi-pencil"></i> Editar
-                    </button>
+                    </a>
                 </div>
             </td>
         </tr>

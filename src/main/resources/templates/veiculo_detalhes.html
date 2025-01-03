@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Veículo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/veiculos.css}">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" th:text="'Editar Veículo: ' + ${veiculo.modelo}"></h1>
+
+        <form th:action="@{/veiculos/editar/{id}(id=${veiculo.id})}" method="post">
+            <div class="row">
+                <!-- Imagem do veículo -->
+                <div class="col-md-4 text-center">
+                    <img th:src="${veiculo.imagem}" alt="Imagem do Veículo" class="img-fluid img-thumbnail mb-3">
+                    <div class="form-group mt-2">
+                        <label for="imagem" class="form-label">URL da Imagem</label>
+                        <input type="text" class="form-control" id="imagem" name="imagem" th:value="${veiculo.imagem}">
+                    </div>
+                </div>
+                <!-- Detalhes do veículo -->
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr class="dados-oculto-user">
+                                <th>Tipo</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="tipo" name="tipo"
+                                        th:value="${veiculo.tipo}" required>
+                                </td>
+                            </tr>
+                            <tr class="dados-oculto-user">
+                                <th>Modelo</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="modelo" name="modelo"
+                                        th:value="${veiculo.modelo}" required>
+                                </td>
+                            </tr>
+                            <tr class="dados-oculto-user">
+                                <th>Marca</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="marca" name="marca"
+                                        th:value="${veiculo.marca}" required>
+                                </td>
+                            </tr>
+                            <tr class="dados-oculto-user">
+                                <th>Ano</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="ano" name="ano"
+                                        th:value="${veiculo.ano}" required>
+                                </td>
+                            </tr>
+                            <tr class="dados-oculto-user">
+                                <th>Cor</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="cor" name="cor"
+                                        th:value="${veiculo.cor}" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Preço</th>
+                                <td>
+                                    <input type="number" step="0.01" class="form-control" id="preco" name="preco"
+                                        th:value="${veiculo.preco}" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>KMs Rodados</th>
+                                <td>
+                                    <input type="number" class="form-control" id="quilometragem" name="quilometragem"
+                                        th:value="${veiculo.quilometragem}" required>
+                                </td>
+                            </tr>
+                            <tr class="dados-oculto-user">
+                                <th>Combustivel</th>
+                                <td>
+                                    <input type="hidden" class="form-control" id="combustivel" name="combustivel"
+                                        th:value="${veiculo.combustivel}" required>
+                                </td>
+                            </tr>
+
+                            <tr class="dados-oculto-user">
+                                <th>Câmbio Automático</th>
+                                <td>
+                                    <select class="form-select" id="cambioAutomatico" name="cambioAutomatico" required>
+                                        <option th:value="true" th:selected="${veiculo.cambioAutomatico}">Sim</option>
+                                        <option th:value="false" th:selected="${!veiculo.cambioAutomatico}">Não</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Disponibilidade</th>
+                                <td>
+                                    <select class="form-select" id="disponibilidade" name="disponibilidade" required>
+                                        <option th:value="true" th:selected="${veiculo.disponibilidade}">Disponível
+                                        </option>
+                                        <option th:value="false" th:selected="${!veiculo.disponibilidade}">Vendido
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <!-- Campos específicos para Carro -->
+                            <tr th:if="${veiculo.tipo == 'carro'}" class="dados-oculto-user">
+                                <th>Motor</th>
+                                <td>
+                                    <input type="text" class="form-control" id="motor" name="motor"
+                                        th:value="${#strings.defaultString(veiculo.motor, '')}">
+                                </td>
+                            </tr>
+                            <tr th:if="${veiculo.tipo == 'carro'}" class="dados-oculto-user">
+                                <th>Portas</th>
+                                <td>
+                                    <input type="number" class="form-control" id="portas" name="portas"
+                                        th:value="${veiculo.portas}">
+                                </td>
+                            </tr>
+                            <tr th:if="${veiculo.tipo == 'carro'}" class="dados-oculto-user">
+                                <th>Ar Condicionado</th>
+                                <td>
+                                    <select class="form-select" id="arCondicionado" name="arCondicionado">
+                                        <option th:value="true" th:selected="${veiculo.arCondicionado}">Sim</option>
+                                        <option th:value="false" th:selected="${!veiculo.arCondicionado}">Não</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <!-- Campos específicos para Moto -->
+                            <tr th:if="${veiculo.tipo == 'moto'}" class="dados-oculto-user">
+                                <th>Cilindradas</th>
+                                <td>
+                                    <input type="number" class="form-control" id="cilindradas" name="cilindradas"
+                                        th:value="${veiculo.cilindradas}">
+                                </td>
+                            </tr>
+                            <tr th:if="${veiculo.tipo == 'moto'}">
+                                <th>Baú de Carga</th>
+                                <td>
+                                    <select class="form-select" id="bauCarga" name="bauCarga">
+                                        <option th:value="true" th:selected="${veiculo.bauCarga}">Sim</option>
+                                        <option th:value="false" th:selected="${!veiculo.bauCarga}">Não</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="text-center mt-4">
+                <a href="/veiculos" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

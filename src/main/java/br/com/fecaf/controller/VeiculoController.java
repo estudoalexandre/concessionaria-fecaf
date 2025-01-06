@@ -3,8 +3,6 @@ package br.com.fecaf.controller;
 import br.com.fecaf.model.Carro;
 import br.com.fecaf.model.Moto;
 import br.com.fecaf.model.Veiculo;
-import br.com.fecaf.repository.CarroRepository;
-import br.com.fecaf.repository.MotoRepository;
 import br.com.fecaf.repository.VeiculoRepository;
 import br.com.fecaf.services.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +24,6 @@ public class VeiculoController {
     private VeiculoService veiculoService;
     @Autowired
     private VeiculoRepository veiculoRepository;
-
-    @Autowired
-    private CarroRepository carroRepository;
-
-    @Autowired
-    private MotoRepository motoRepository;
 
     @CrossOrigin(origins = "http://localhost:5500", allowedHeaders = "*")
     @GetMapping("/listarVeiculos")
